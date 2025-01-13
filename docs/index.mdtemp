@@ -1,0 +1,40 @@
+---
+layout: default
+title: Home
+nav_order: 1
+---
+
+
+@startuml
+
+skinparam rectangle<<technology>> {
+	roundCorner 25
+}
+skinparam rectangle<<application>> {
+	roundCorner 25
+}
+skinparam rectangle<<business>> {
+	roundCorner 25
+}
+
+sprite $techService jar:archimate/technology-service
+sprite $appComponent jar:archimate/application-component
+sprite $appProcess jar:archimate/application-process
+'sprite $appDataObject jar:archimate/application-data-object
+sprite $businessProcess jar:archimate/business-process
+sprite $businessService jar:archimate/business-service
+sprite $techArtifact jar:archimate/technology-artifact
+
+
+rectangle "FHIR server" as FS <<$businessService>><<business>> #Business
+
+package "Conformance test components" as ConfTest1 {
+  rectangle "Testable specifications" as Spec <<$appDataObject>><<application>> #Application
+	}
+
+frame "Conformance test components" as ConfTest {
+  rectangle "IG Builder" as IGBuilder <<$appComponent>><<application>> #Application
+  rectangle "Resource Validation" as ResourceValidator <<$appComponent>><<application>> #Application
+}
+
+@enduml
